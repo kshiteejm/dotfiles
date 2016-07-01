@@ -1,0 +1,404 @@
+" .vimrc
+
+" {{{ vim-plug
+
+call plug#begin('~/.vim/plugged')
+
+" :Ack
+Plug 'mileszs/ack.vim'
+
+" Colorschemes
+Plug 'captbaritone/molokai'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'altercation/vim-colors-solarized'
+Plug 'fxn/vim-monochrome'
+Plug 'chriskempson/base16-vim'
+Plug 'NLKNguyen/papercolor-theme'
+
+" Better status line
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" ga for character descriptions
+Plug 'tpope/vim-characterize'
+
+" :Gdiff, :Gcommit, etc.
+Plug 'tpope/vim-fugitive'
+
+" Inline git status
+Plug 'airblade/vim-gitgutter'
+
+" Syntax
+Plug 'tpope/vim-git', { 'for': 'git' }
+Plug 'tpope/vim-markdown', { 'for' : 'markdown' }
+
+" Completion
+Plug 'mattn/emmet-vim', { 'for': 'html' }
+
+" Make % match xml tags
+Plug 'edsono/vim-matchit', { 'for': ['html', 'xml'] }
+
+" Python syntax folding
+Plug 'tmhedberg/SimpylFold'
+
+" Syntastic: Code linting errors
+Plug 'scrooloose/syntastic', { 'for': ['php', 'python', 'javascript', 'css'] }
+
+" Javascript syntax
+Plug 'othree/yajs.vim', { 'for': 'javascript'}
+
+" JSON syntax highlighting
+Plug 'elzr/vim-json'
+
+" Comment with gc
+Plug 'tpope/vim-commentary'
+
+" Pairs of handy bracket mappings
+Plug 'tpope/vim-unimpaired'
+
+" Repeat things
+Plug 'tpope/vim-repeat'
+
+" JSON pretty printing with gqaj
+Plug 'tpope/vim-jdaddy'
+
+" YouCompleteMe
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+
+" Open current Markdown buffer in Marked2
+Plug 'itspriddle/vim-marked'
+
+" Better rainbow parens
+Plug 'luochen1990/rainbow'
+
+" iTerm2 and tmux integration
+Plug 'sjl/vitality.vim'
+
+" Split navigation that works with tmux
+Plug 'christoomey/vim-tmux-navigator'
+
+" netrw improvements
+Plug 'tpope/vim-vinegar'
+
+" argument manipulation
+Plug 'PeterRincker/vim-argumentative'
+
+" manipulate delimiters
+Plug 'tpope/vim-surround'
+
+" even better (and consistent) fuzzy finding
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+
+" async build tasks
+Plug 'tpope/vim-dispatch'
+
+" github integration
+Plug 'tpope/vim-rhubarb'
+
+call plug#end()
+
+filetype plugin indent on
+syntax enable
+
+" }}}
+" {{{ Setup
+
+" Set the terminal font encoding
+set encoding=utf-8
+scriptencoding utf-8
+set termencoding=utf-8
+
+" Manage multiple buffers
+set hidden
+
+" }}}
+" {{{ Ack
+" Skip normal config, show filenames, no color, one result per line, show column numbers, smart case
+let g:ackprg='ack --noenv -H --nocolor --nogroup --column --smart-case --after=0 --before=0'
+
+" }}}
+" {{{ Airline
+" No separators between sections
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_symbols.readonly = '∅'
+
+" }}}
+" {{{ Autocommands
+if has('autocmd')
+    " Clear existing autocommands before defining them, in case this file is loaded again
+    autocmd!
+
+    augroup last_cursor
+        autocmd!
+
+        " Jump to last cursor position unless it's invalid or in an event handler or
+        " a git commit
+        autocmd BufReadPost *
+          \ if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line('$') |
+          \   exe 'normal! g`"' |
+          \ endif
+    augroup END
+
+    augroup cursor_highlight
+        autocmd!
+
+        " Only show cursorline in active windows
+        autocmd WinLeave * set nocursorline colorcolumn=""
+        autocmd WinEnter * set cursorline colorcolumn=+1
+    augroup END
+endif
+
+" }}}
+" {{{ Backups
+" Skip backup entirely. It's annoying.
+set nobackup
+if has('writebackup')
+    set nowritebackup
+endif
+
+" }}}
+" {{{ Diff
+set diffopt+=vertical
+
+" }}}
+" {{{ Folding
+" Fold with triple curly braces, fill with spaces
+if has('folding')
+    set foldenable
+    set foldmethod=marker
+    set foldopen=hor,search,tag,undo
+    set fillchars=diff:\ ,fold:\ ,vert:\
+endif
+
+" }}}
+" {{{ Formatting
+" Auto indent new lines
+set autoindent
+
+" Show matching braces
+set showmatch
+
+" Spacing and tabbing
+" Use shiftwidth and tabstop smartly
+set smarttab
+
+" Spaces
+set expandtab
+
+" Tab width
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
+set textwidth=100
+
+" Don't wrap text
+set nowrap
+
+" But if prose *is* wrapped with linebreak, make it look good
+" if has('linebreak')
+"     set breakindent " breakindent option not recognized
+"     let &showbreak = '» '
+"     set cpo+=n
+" end
+
+" Highlight the first column after the text width
+if exists('&colorcolumn')
+    set colorcolumn=+1
+endif
+
+" From the Vim docs:
+" t   Auto-wrap text using textwidth
+"
+" c   Auto-wrap comments using textwidth, inserting the current comment
+"     leader automatically.
+"
+" r   Automatically insert the current comment leader after hitting
+"     <Enter> in Insert mode.
+"
+" o   Automatically insert the current comment leader after hitting 'o' or
+"     'O' in Normal mode.
+"
+" n   When formatting text, recognize numbered lists.  This actually uses
+"     the 'formatlistpat' option, thus any kind of list can be used.  The
+"     indent of the text after the number is used for the next line.  The
+"     default is to find a number, optionally followed by '.', ':', ')',
+"     ']' or '}'.  Note that 'autoindent' must be set too.  Doesn't work
+"     well together with "2".
+"     Example:
+"         1. the first item
+"            wraps
+"         2. the second item
+set formatoptions+=t,c,r,o,n
+
+augroup vimrc
+    autocmd!
+
+    autocmd FileType xhtml,xml,html set textwidth=0
+    autocmd FileType make set noexpandtab tabstop=8 softtabstop=8 shiftwidth=8
+    autocmd FileType markdown set textwidth=0 wrapmargin=0 wrap linebreak
+    autocmd FileType clojure set tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd FileType yaml set tabstop=2 softtabstop=2 shiftwidth=2
+augroup END
+
+" }}}
+" {{{ Fugitive
+nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gc :Gcommit<cr>
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gl :Glog<cr>
+nnoremap <leader>gp :Git push<cr>
+nnoremap <leader>gs :Git status -sb<cr>
+
+" }}}
+" {{{ fzf
+nnoremap <silent> <leader><leader> :Files<cr>
+nnoremap <silent> <leader><Enter> :Buffers<cr>
+
+" }}}
+" {{{ git-gutter
+" Escape grep so we don't have color codes
+let g:gitgutter_escape_grep = 1
+
+" Ignore whitespace (we have other plugins for that)
+let g:gitgutter_diff_args = '-w'
+
+" Don't map any keys by default
+let g:gitgutter_map_keys = 0
+
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+nmap <leader>hs <Plug>GitGutterStageHunk
+nmap <leader>hr <Plug>GitGutterRevertHunk
+
+" }}}
+" {{{ History
+" Command history
+set history=1000
+
+" }}}
+" {{{ Key remaps
+" Completion
+inoremap <Nul> <C-X><C-P>
+
+" Edit and source this file
+nmap <silent> <leader>ev :split $MYVIMRC<CR>
+nmap <silent> <leader>sv :source $MYVIMRC<CR>
+
+" }}}
+" {{{ Line Numbers
+" Show line numbers
+set number
+if exists('&relativenumber')
+    set relativenumber
+endif
+
+" }}}
+" {{{ Rainbow
+let g:rainbow_active = 1
+
+let g:rainbow_conf = {
+    \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+    \   'ctermfgs': ['darkblue', 'darkyellow', 'darkmagenta', 'darkred', 'red', 'blue', 'yellow', 'magenta', 'cyan', 'lightblue', 'lightyellow', 'lightmagenta', 'lightcyan'],
+    \   'operators': '_,_',
+    \   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+    \   'separately': {
+    \       '*': {},
+    \       'tex': {
+    \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+    \       },
+    \       'lisp': {
+    \           'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+    \       },
+    \       'vim': {
+    \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+    \       },
+    \       'html': {
+    \           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+    \       },
+    \       'css': 0,
+    \   }
+    \}
+
+" }}}
+" {{{ Scrolling
+" Scrolling context; lines/columns of buffer while scrolling
+set scrolloff=3
+set sidescrolloff=5
+
+" Scrolling speed
+nnoremap <C-e> 5<C-e>
+nnoremap <C-y> 5<C-y>
+
+" }}}
+" {{{ Undo
+" -- see http://amix.dk/blog/post/19548
+if has('persistent_undo')
+    set undodir=~/.vim/undodir
+    set undofile
+
+    " max changes that can be undone
+    set undolevels=1000
+
+    " max lines to save for undo on buffer reload
+    set undoreload=10000
+endif
+
+" }}}
+" {{{ Utility
+" Respect vim modelines
+set modeline
+
+" Use the file's name in the title
+set title
+
+" Highlight the line the cursor is on
+set cursorline
+
+" Let backspace do what it's supposed to: allow backspace over indent, eol, and start of an insert
+set backspace=indent,eol,start
+
+" }}}
+" {{{ Windows
+" Split windows below and right -- default is above and left, which can be disorienting
+set splitbelow splitright
+
+" Better window management and navigation
+map <leader>w <C-w>w
+map <leader>W <C-w>W
+map <leader>_ <C-w>_
+
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+" }}}
+
+" {{{ Epilog
+" Turn syntax on after everything else
+syntax on
+
+" {{{ Colors
+set background=dark
+
+let g:solarized_termtrans = 1
+let g:solarized_underline = 0
+silent! colorscheme solarized
+
+hi Folded term=standout ctermfg=3 ctermbg=none
+
+highlight link SignColumn LineNr
+highlight link GitGutterAdd DiffAdd
+highlight link GitGutterChange DiffChange
+highlight link GitGutterDelete DiffDelete
+highlight link GitGutterChangeDelete DiffDelete
+
+" }}}
+" }}}
