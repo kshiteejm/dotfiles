@@ -238,6 +238,8 @@ endif
 "         2. the second item
 set formatoptions+=t,c,r,o,n
 
+set pastetoggle=<F2>
+
 augroup vimrc
     autocmd!
 
