@@ -39,7 +39,7 @@ Plug 'mattn/emmet-vim', { 'for': 'html' }
 Plug 'edsono/vim-matchit', { 'for': ['html', 'xml'] }
 
 " Python syntax folding
-Plug 'tmhedberg/SimpylFold'
+Plug 'tmhedberg/SimpylFold', { 'for': 'python' }
 
 " Syntastic: Code linting errors
 Plug 'scrooloose/syntastic', { 'for': ['php', 'python', 'javascript', 'css'] }
@@ -48,7 +48,7 @@ Plug 'scrooloose/syntastic', { 'for': ['php', 'python', 'javascript', 'css'] }
 Plug 'othree/yajs.vim', { 'for': 'javascript'}
 
 " JSON syntax highlighting
-Plug 'elzr/vim-json'
+Plug 'elzr/vim-json'. { 'for': 'json' }
 
 " Comment with gc
 Plug 'tpope/vim-commentary'
@@ -89,6 +89,9 @@ Plug 'tpope/vim-surround'
 " even better (and consistent) fuzzy finding
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+
+"" file finding
+" Plug 'wincent/command-t', { 'do': 'cd ruby/command-t && ruby extconf.rb && make' }
 
 " async build tasks
 Plug 'tpope/vim-dispatch'
@@ -263,6 +266,13 @@ nnoremap <leader>gs :Git status -sb<cr>
 " {{{ fzf
 nnoremap <silent> <leader><leader> :Files<cr>
 nnoremap <silent> <leader><Enter> :Buffers<cr>
+
+" }}}
+" {{{ Command-T settings
+" let g:CommandTMaxDepth = 20
+" let g:CommandTMaxHeight = 10
+" let g:CommandTMatchWindowReverse = 1
+" let g:CommandTTraverseSCM='pwd'
 
 " }}}
 " {{{ git-gutter
