@@ -1,0 +1,9 @@
+#!/bin/bash
+
+mkdir -p ~/scratch
+cd ~/scratch
+git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git
+cd -
+cd ~/scratch/gnome-terminal-colors-solarized/
+./install.sh
+cd -
