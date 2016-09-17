@@ -45,10 +45,10 @@ Plug 'tmhedberg/SimpylFold', { 'for': 'python' }
 Plug 'scrooloose/syntastic', { 'for': ['php', 'python', 'javascript', 'css'] }
 
 " Javascript syntax
-Plug 'othree/yajs.vim', { 'for': 'javascript'}
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
 
 " JSON syntax highlighting
-Plug 'elzr/vim-json'. { 'for': 'json' }
+Plug 'elzr/vim-json', { 'for': 'json' }
 
 " Comment with gc
 Plug 'tpope/vim-commentary'
@@ -438,7 +438,7 @@ if(g:my_colorscheme == 'solarized')
     let g:solarized_italic=1
     let g:solarized_underline=0
     let g:airline_theme=g:my_airlinetheme
-    colorscheme solarized
+    silent! colorscheme solarized
 elseif(g:my_colorscheme == 'monokai')
     let g:airline_theme='airlineish'
     colorscheme monokai
