@@ -311,6 +311,8 @@ set number
 if exists('&relativenumber')
     set relativenumber
 endif
+" toggle relative numbers
+map <leader>rn :set relativenumber!<cr>
 
 " }}}
 " {{{ Rainbow
@@ -397,14 +399,64 @@ noremap <C-l> <C-w>l
 " Turn syntax on after everything else
 syntax on
 
+" }}}
 " {{{ Colors
-set background=dark
+let mapleader=$LEADER
+let g:my_background=$BACKGROUND
+let g:my_colorscheme=$COLORSCHEME
+let g:my_airlinetheme=$AIRLINE_THEME
 
-let g:solarized_termtrans = 1
-let g:solarized_underline = 0
-silent! colorscheme solarized
+" default values for configuration variables
+if (mapleader == '')
+    let mapleader=','
+endif
+
+if (g:my_background == '')
+    let g:my_background='dark'
+endif
+
+if (g:my_colorscheme == '')
+    let g:my_colorscheme='solarized'
+endif
+
+if (g:my_airlinetheme == '')
+    let g:my_airlinetheme = 'solarized'
+endif
+
+if(g:my_background == 'light')
+    set background=light
+else
+    set background=dark
+endif
+
+" hi Normal ctermbg=None
+" set t_Co=256
+
+if(g:my_colorscheme == 'solarized')
+    " let g:solarized_termcolors=256
+    let g:solarized_termtrans=0
+    let g:solarized_italic=1
+    let g:solarized_underline=0
+    let g:airline_theme=g:my_airlinetheme
+    colorscheme solarized
+elseif(g:my_colorscheme == 'monokai')
+    let g:airline_theme='airlineish'
+    colorscheme monokai
+endif
 
 hi Folded term=standout ctermfg=3 ctermbg=none
+
+function! ToggleBG()
+    if g:my_background=="light"
+        let g:my_background="dark"
+        set background=dark
+    else
+        let g:my_background="light"
+        set background=light
+    endif
+    let g:airline_theme = g:my_airlinetheme
+endfunc
+map <leader>cc <Esc>:call ToggleBG()<cr>
 
 highlight link SignColumn LineNr
 highlight link GitGutterAdd DiffAdd
@@ -412,5 +464,4 @@ highlight link GitGutterChange DiffChange
 highlight link GitGutterDelete DiffDelete
 highlight link GitGutterChangeDelete DiffDelete
 
-" }}}
 " }}}
