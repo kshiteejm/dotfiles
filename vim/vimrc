@@ -62,7 +62,8 @@ Plug 'tpope/vim-repeat'
 " JSON pretty printing with gqaj
 Plug 'tpope/vim-jdaddy'
 
-" YouCompleteMe
+" UltiSnips & YouCompleteMe
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
 " Open current Markdown buffer in Marked2
@@ -87,7 +88,7 @@ Plug 'PeterRincker/vim-argumentative'
 Plug 'tpope/vim-surround'
 
 " even better (and consistent) fuzzy finding
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 "" file finding
@@ -394,7 +395,6 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 " }}}
-
 " {{{ Epilog
 " Turn syntax on after everything else
 syntax on
