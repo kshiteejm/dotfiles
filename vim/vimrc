@@ -124,6 +124,7 @@ let g:ackprg='ack --noenv -H --nocolor --nogroup --column --smart-case --after=0
 " }}}
 " {{{ Airline
 " No separators between sections
+set laststatus=2
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 
@@ -309,6 +310,8 @@ nmap <silent> <leader>sv :source $MYVIMRC<CR>
 " {{{ Line Numbers
 " Show line numbers
 set number
+" toggle line numbers
+map <leader>ll :set number! \| :set relativenumber!<cr>
 if exists('&relativenumber')
     set relativenumber
 endif
@@ -430,10 +433,10 @@ else
 endif
 
 " hi Normal ctermbg=None
-" set t_Co=256
+set t_Co=16
 
 if(g:my_colorscheme == 'solarized')
-    " let g:solarized_termcolors=256
+    let g:solarized_termcolors=16
     let g:solarized_termtrans=0
     let g:solarized_italic=1
     let g:solarized_underline=0
