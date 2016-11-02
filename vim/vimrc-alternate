@@ -1,10 +1,8 @@
 " .vimrc
 
-if !empty(glob("/nobackup/.vimrc"))
-    set runtimepath=/usr/share/vim/vim74
-    set runtimepath^=/nobackup/.vim
-    set runtimepath+=/nobackup/.vim/after
-endif
+set runtimepath=/usr/share/vim/vim74
+set runtimepath^=/nobackup/.vim
+set runtimepath+=/nobackup/.vim/after
 
 " {{{ vim-plug
 
