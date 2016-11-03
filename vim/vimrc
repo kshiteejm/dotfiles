@@ -39,10 +39,10 @@ Plug 'tpope/vim-git', { 'for': 'git' }
 Plug 'tpope/vim-markdown', { 'for' : 'markdown' }
 
 " Completion
-Plug 'mattn/emmet-vim', { 'for': 'html' }
+" Plug 'mattn/emmet-vim', { 'for': 'html' }
 
 " Make % match xml tags
-Plug 'edsono/vim-matchit', { 'for': ['html', 'xml'] }
+" Plug 'edsono/vim-matchit', { 'for': ['html', 'xml'] }
 
 " Python syntax folding
 Plug 'tmhedberg/SimpylFold', { 'for': 'python' }
