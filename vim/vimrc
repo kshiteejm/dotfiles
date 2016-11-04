@@ -93,12 +93,21 @@ Plug 'PeterRincker/vim-argumentative'
 " manipulate delimiters
 Plug 'tpope/vim-surround'
 
+" easy align
+Plug 'junegunn/vim-easy-align'
+
 " even better (and consistent) fuzzy finding
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-"" file finding
+" file finding
 " Plug 'wincent/command-t', { 'do': 'cd ruby/command-t && ruby extconf.rb && make' }
+
+" file finding
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+
+" class outline viewer
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 
 " async build tasks
 Plug 'tpope/vim-dispatch'
@@ -274,6 +283,13 @@ nnoremap <leader>gs :Git status -sb<cr>
 " {{{ fzf
 nnoremap <silent> <leader><leader> :Files<cr>
 nnoremap <silent> <leader><Enter> :Buffers<cr>
+
+" }}}
+" {{{ NerdTree, Tagbar, EasyAlign
+map <leader>nt <Esc>:NERDTreeToggle<cr>
+map <leader>tt <Esc>:TagbarToggle<cr>
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " }}}
 " {{{ Command-T settings
