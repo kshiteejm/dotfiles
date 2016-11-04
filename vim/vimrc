@@ -131,6 +131,11 @@ set termencoding=utf-8
 " Manage multiple buffers
 set hidden
 
+let mapleader=$LEADER
+if (mapleader == '')
+    let mapleader=','
+endif
+
 " }}}
 " {{{ Ack
 " Skip normal config, show filenames, no color, one result per line, show column numbers, smart case
@@ -426,16 +431,11 @@ syntax on
 
 " }}}
 " {{{ Colors
-let mapleader=$LEADER
 let g:my_background=$BACKGROUND
 let g:my_colorscheme=$COLORSCHEME
 let g:my_airlinetheme=$AIRLINE_THEME
 
 " default values for configuration variables
-if (mapleader == '')
-    let mapleader='\'
-endif
-
 if (g:my_background == '')
     let g:my_background='dark'
 endif
