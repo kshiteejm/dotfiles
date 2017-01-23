@@ -115,6 +115,9 @@ Plug 'tpope/vim-dispatch'
 " github integration
 Plug 'tpope/vim-rhubarb'
 
+" python programslice
+Plug 'romanofski/programslice.vim'
+
 call plug#end()
 
 filetype plugin indent on
@@ -488,5 +491,11 @@ highlight link GitGutterAdd DiffAdd
 highlight link GitGutterChange DiffChange
 highlight link GitGutterDelete DiffDelete
 highlight link GitGutterChangeDelete DiffDelete
+
+" }}}
+" {{{ Python Program Slice
+let g:programslice_cmd = "/u/k/s/kshiteejm/.local/bin/programslice"
+let g:programslice_debug_file = "/u/k/s/kshiteejm/.programslice/debug"
+let g:programslice_disable_version_check = 1
 
 " }}}
