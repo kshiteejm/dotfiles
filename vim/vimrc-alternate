@@ -116,6 +116,9 @@ Plug 'tpope/vim-rhubarb'
 " python programslice
 " Plug 'romanofski/programslice.vim'
 
+" easily interact with tmux from vim
+Plug 'benmills/vimux'
+
 call plug#end()
 
 filetype plugin indent on
@@ -425,6 +428,24 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
+
+" vv to generate new vertical split
+nnoremap <silent> vv <C-w>v
+
+" }}}
+" {{{ vimux
+" Prompt for a command to run
+map <Leader>vp :VimuxPromptCommand<CR>
+
+" Run last command executed by VimuxRunCommand
+map <Leader>vl :VimuxRunLastCommand<CR>
+
+" Inspect runner pane
+map <Leader>vi :VimuxInspectRunner<CR>
+
+" Zoom the tmux runner pane
+map <Leader>vz :VimuxZoomRunner<CR>
+
 " }}}
 " {{{ Epilog
 " Turn syntax on after everything else
