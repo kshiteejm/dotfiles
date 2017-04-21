@@ -116,7 +116,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-rhubarb'
 
 " python programslice
-Plug 'romanofski/programslice.vim'
+" Plug 'romanofski/programslice.vim'
 
 call plug#end()
 
