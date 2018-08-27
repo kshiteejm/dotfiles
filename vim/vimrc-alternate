@@ -513,8 +513,8 @@ highlight link GitGutterChangeDelete DiffDelete
 
 " }}}
 " {{{ Python Program Slice
-let g:programslice_cmd = "/u/k/s/kshiteejm/.local/bin/programslice"
-let g:programslice_debug_file = "/u/k/s/kshiteejm/.programslice/debug"
-let g:programslice_disable_version_check = 1
+" let g:programslice_cmd = "/nobackup/.local/bin/programslice"
+" let g:programslice_debug_file = "/nobackup/.programslice/debug"
+" let g:programslice_disable_version_check = 1
 
 " }}}
