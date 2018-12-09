@@ -45,10 +45,10 @@ Plug 'tpope/vim-markdown', { 'for' : 'markdown' }
 " Plug 'edsono/vim-matchit', { 'for': ['html', 'xml'] }
 
 " Python syntax folding
-Plug 'tmhedberg/SimpylFold', { 'for': 'python' }
+" Plug 'tmhedberg/SimpylFold', { 'for': 'python' }
 
 " Syntastic: Code linting errors
-Plug 'scrooloose/syntastic', { 'for': ['php', 'python', 'javascript', 'css'] }
+" Plug 'scrooloose/syntastic', { 'for': ['php', 'python', 'javascript', 'css'] }
 
 " Javascript syntax
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
