@@ -1,6 +1,6 @@
 " .vimrc
 
-set runtimepath=/nobackup/vim/share/vim/vim80
+set runtimepath=/nobackup/vim/share/vim/vim81
 set runtimepath^=/nobackup/.vim
 set runtimepath+=/nobackup/.vim/after
 
